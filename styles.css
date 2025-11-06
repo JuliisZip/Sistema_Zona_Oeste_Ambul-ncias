@@ -118,7 +118,7 @@ nav a:hover {
   background: #1d2150ee;
 }
 
-.dark-mode #btnDarkToggle: houver {
+.dark-mode #btnDarkToggle:hover{
   background: linear-gradient(90deg, #fc41b5 0%, #fd518b 99%);
 }
 
