@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Ambulância | Hospitais</title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <!-- Configuração Firebase -->
+  <script src="firebase-config.js"></script>
+  <script src="firebase-db.js"></script>
+
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="hospitais.html" class="active">🏥 Hospitais</a></li>
+        <li><a href="chamados.html">🚑 Chamados</a></li>
+        <li><a href="creditos.html">👩‍💻 Créditos</a></li>
+      </ul>
+      <button id="btnDarkToggle" title="Modo escuro">🌗</button>
+    </nav>
+  </header>
+  <main>
+    <section class="card glass">
+      <h2>Condição Atual dos Hospitais</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Hospital</th>
+            <th>Bairro</th>
+            <th>Capacidade</th>
+            <th>Ocupação</th>
+            <th>Vagas</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Hospital das Clínicas</td><td>Pinheiros</td><td>50</td><td id="OcupadosPinheiros"></td><td id="VagasPinheiros"></td><td><span id="StatusPinheiros"></span></td></tr>
+          <tr><td>UPA Vila Madalena</td><td>Vila Madalena</td><td>20</td><td>20</td><td id="VagasVilaMadalena"></td><td><span id="StatusVilaMadalena"></span></td></tr>
+          <tr><td>Hospital Universitário USP</td><td>Butantã</td><td>60</td><td id="OcupadosButantã"></td><td id="VagasButantã"></td><td><span id="StatusButantã"></span></td></tr>
+          <tr><td>UPA Lapa</td><td>Lapa</td><td>30</td><td>30</td><td id="VagasLapa"></td><td><span id="StatusLapa"></span></td></tr>
+          <tr><td>Hospital São Camilo</td><td>Perdizes</td><td>40</td><td id="OcupadosPerdizes"></td><td id="VagasPerdizes"></td><td><span id="StatusPerdizes"></span></td></tr>
+          <tr><td>Santa Casa Barra Funda</td><td>Barra Funda</td><td>35</td><td>35</td><td id="VagasBarraFunda"></td><td><span id="StatusBarraFunda"></span></td></tr>
+          <tr><td>UPA Alto de Pinheiros</td><td>Alto de Pinheiros</td><td>25</td><td>25</td><td id="VagasAltodePinheiros"></td><td><span id="StatusAltodePinheiros"></span></td></tr>
+          <tr><td>Hospital Vila Penteado</td><td>Vila Leopoldina</td><td>30</td><td>30</td><td id="VagasVilaLeopoldina"></td><td><span id="StatusVilaLeopoldina"></span></td></tr>
+          <tr><td>UPA Jaguaré</td><td>Jaguaré</td><td>20</td><td id="OcupadosJaguaré"></td><td id="VagasJaguaré"></td><td><span id="StatusJaguaré"></span></td></tr>
+          <tr><td>Hospital Leforte</td><td>Vila Sônia</td><td>45</td><td id="OcupadosVilaSônia"></td><td id="VagasVilaSônia"></td><td><span id="StatusVilaSônia"></span></td></tr>
+          <tr><td>Albert Einstein Morumbi</td><td>Morumbi</td><td>50</td><td>50</td><td id="VagasMorumbi"></td><td><span id="StatusMorumbi"></span></td></tr>
+          <tr><td>UPA Rio Pequeno</td><td>Rio Pequeno</td><td>30</td><td id="OcupadosRioPequeno"></td><td id="VagasRioPequeno"></td><td><span id="StatusRioPequeno"></span></td></tr>
+          <tr><td>São Camilo Pompéia</td><td>Pompéia</td><td>40</td><td>40</td><td id="VagasPompéia"><td><span id="StatusPompéia"></span></td></tr>
+          <tr><td>Sírio-Libanês Jardins</td><td>Jardim Paulista</td><td>60</td><td>60</td><td id="VagasJardimPaulista"></td><td><span id="StatusJardimPaulista"></span></td></tr>
+          <tr><td>São Luiz Itaim</td><td>Itaim Bibi</td><td>55</td><td>55</td><td id="VagasItaimBibi"></td><td><span id="StatusItaimBibi"></span></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="card">
+      <h3>ℹ️ Informações Técnicas</h3>
+      <ul>
+        <li><strong>Algoritmo:</strong> Busca em largura (BFS).</li>
+        <li><strong>Hospitais:</strong> 15 unidades cadastradas.</li>
+        <li><strong>Percurso:</strong> Raio máximo 3 bairros.</li>
+        <li><strong>Vagas Iniciais:</strong> 5 unidades disponíveis (Butantã ➔ 15;   Perdizes ➔ 1;   Jaguaré ➔ 2;   Vila Sônia ➔ 1;   Rio Pequeno ➔ 2).</li>
+
+        
+      </ul>
+    </section>
+  </main>
+  <script>
+    document.getElementById('btnDarkToggle').onclick = function(){
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>

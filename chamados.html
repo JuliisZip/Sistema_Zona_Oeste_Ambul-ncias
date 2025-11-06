@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Ambulância | Chamados</title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <!-- Configuração Firebase -->
+  <script src="firebase-config.js"></script>
+  <script src="firebase-db.js"></script>
+
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="hospitais.html">🏥 Hospitais</a></li>
+        <li><a href="chamados.html" class="active">🚑 Chamados</a></li>
+        <li><a href="creditos.html">👩‍💻 Créditos</a></li>
+      </ul>
+      <button id="btnDarkToggle" title="Modo escuro">🌗</button>
+    </nav>
+  </header>
+  <main>
+  <section class="card">
+    <h2>Novo Chamado</h2>
+    <form id="formChamado">
+      <label for="bairro">Selecione o bairro do chamado</label>
+      <select id="bairro" required>
+        <option value="">-- Escolha o bairro --</option>
+        <option>Pinheiros</option>
+        <option>Vila Madalena</option>
+        <option>Butantã</option>
+        <option>Lapa</option>
+        <option>Perdizes</option>
+        <option>Barra Funda</option>
+        <option>Alto de Pinheiros</option>
+        <option>Vila Leopoldina</option>
+        <option>Jaguaré</option>
+        <option>Vila Sônia</option>
+        <option>Morumbi</option>
+        <option>Rio Pequeno</option>
+        <option>Pompéia</option>
+        <option>Jardim Paulista</option>
+        <option>Itaim Bibi</option>
+      </select>
+      <button type="submit" class="btn-neon">Buscar Hospital Disponível</button>
+    </form>
+    <div id="resultado-chamado"></div>
+  </section>
+  <section class="card">
+    <h2>Teste Rápido do Professor</h2>
+    <button id="btnTestes" class="btn-neon">Executar Testes do Professor</button>
+    <div id="resultado-professor"></div>
+  </section>
+</main>
+<script>
+  document.getElementById('btnDarkToggle').onclick = function(){
+    document.body.classList.toggle('dark-mode');
+  }
+</script>
+</body>
+</html>

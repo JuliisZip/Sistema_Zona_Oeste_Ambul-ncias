@@ -1,0 +1,46 @@
+
+// Exemplo de cálculo:
+const hosp = hospitais.find(h => h.nome === "Hospital das Clínicas");
+const capacidade = hosp.capacidade;
+const ocupados = hosp.ocupados;
+const vagasDisponiveis = capacidade - ocupados; 
+
+// Exibir na célula:
+document.getElementById('VagasPinheiros').innerText = vagasDisponiveis;
+
+
+
+
+// Função para atualizar TODAS as vagas das linhas
+function atualizarTodasAsVagas() {
+    hospitais.forEach((hosp) => {
+    const vagasDisponiveis = hosp.capacidade - hosp.ocupados;
+    
+    // Gerar um ID único para cada hospital (baseado no nome ou bairro)
+    const idElemento = `Vagas${hosp.bairro.replace(/\s+/g, '')}`;
+    
+    //Exibir na célula:
+    const elemento = document.getElementById(idElemento);
+    if (elemento) {
+      elemento.innerText = vagasDisponiveis;
+    }
+  });
+}
+
+
+
+<!-- <tr><td>Hospital das Clínicas</td><td>Pinheiros</td><td>50</td><td>50</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>UPA Vila Madalena</td><td>Vila Madalena</td><td>20</td><td>20</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>Hospital Universitário USP</td><td>Butantã</td><td>60</td><td>45</td><td>15</td><td><span class="badge green">Disponível</span></td></tr>
+          <tr><td>UPA Lapa</td><td>Lapa</td><td>30</td><td>30</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>Hospital São Camilo</td><td>Perdizes</td><td>40</td><td>39</td><td>1</td><td><span class="badge green">Disponível</span></td></tr>
+          <tr><td>Santa Casa Barra Funda</td><td>Barra Funda</td><td>35</td><td>35</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>UPA Alto de Pinheiros</td><td>Alto de Pinheiros</td><td>25</td><td>25</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>Hospital Vila Penteado</td><td>Vila Leopoldina</td><td>30</td><td>30</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>UPA Jaguaré</td><td>Jaguaré</td><td>20</td><td>18</td><td>2</td><td><span class="badge green">Disponível</span></td></tr>
+          <tr><td>Hospital Leforte</td><td>Vila Sônia</td><td>45</td><td>44</td><td>1</td><td><span class="badge green">Disponível</span></td></tr>
+          <tr><td>Albert Einstein Morumbi</td><td>Morumbi</td><td>50</td><td>50</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>UPA Rio Pequeno</td><td>Rio Pequeno</td><td>30</td><td>28</td><td>2</td><td><span class="badge green">Disponível</span></td></tr>
+          <tr><td>São Camilo Pompéia</td><td>Pompéia</td><td>40</td><td>40</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>Sírio-Libanês Jardins</td><td>Jardim Paulista</td><td>60</td><td>60</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>
+          <tr><td>São Luiz Itaim</td><td>Itaim Bibi</td><td>55</td><td>55</td><td>0</td><td><span class="badge red">Indisponível</span></td></tr>  -->

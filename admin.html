@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Popular Banco Firebase</title>
+  <link rel="stylesheet" href="styles.css"/>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <h2>🔧 Painel Admin</h2>
+    </nav>
+  </header>
+  <main style="padding:40px; max-width:800px; margin:0 auto;">
+    <div class="card">
+      <h1>Inicializar Banco de Dados Firebase</h1>
+      <p>Este painel popula o Firestore com os dados iniciais de hospitais e bairros.</p>
+      <button onclick="popularBanco()" class="btn-neon" style="margin:20px 0;">▶ Popular Banco de Dados</button>
+      <button onclick="limparBanco()" class="btn-neon" style="background:linear-gradient(90deg, #fc3169 0%, #ff6b6b 100%);">🗑️ Limpar Banco</button>
+      <div id="log" style="margin-top:30px; font-family:monospace; font-size:0.9em;"></div>
+    </div>
+  </main>
+  
+  <script>
+    async function popularBanco() {
+      const log = document.getElementById('log');
+      log.innerHTML = '<h3>⏳ Populando banco...</h3>';
+      
+      try {
+        // HOSPITAIS
+        const hospitais = [
+          {nome: "Hospital das Clínicas", bairro: "Pinheiros", capacidade: 50, ocupados: 50},
+          {nome: "UPA Vila Madalena", bairro: "Vila Madalena", capacidade: 20, ocupados: 20},
+          {nome: "Hospital Universitário USP", bairro: "Butantã", capacidade: 60, ocupados: 45},
+          {nome: "UPA Lapa", bairro: "Lapa", capacidade: 30, ocupados: 30},
+          {nome: "Hospital São Camilo", bairro: "Perdizes", capacidade: 40, ocupados: 39},
+          {nome: "Santa Casa Barra Funda", bairro: "Barra Funda", capacidade: 35, ocupados: 35},
+          {nome: "UPA Alto de Pinheiros", bairro: "Alto de Pinheiros", capacidade: 25, ocupados: 25},
+          {nome: "Hospital Vila Penteado", bairro: "Vila Leopoldina", capacidade: 30, ocupados: 30},
+          {nome: "UPA Jaguaré", bairro: "Jaguaré", capacidade: 20, ocupados: 18},
+          {nome: "Hospital Leforte", bairro: "Vila Sônia", capacidade: 45, ocupados: 44},
+          {nome: "Albert Einstein Morumbi", bairro: "Morumbi", capacidade: 50, ocupados: 50},
+          {nome: "UPA Rio Pequeno", bairro: "Rio Pequeno", capacidade: 30, ocupados: 28},
+          {nome: "São Camilo Pompéia", bairro: "Pompéia", capacidade: 40, ocupados: 40},
+          {nome: "Sírio-Libanês Jardins", bairro: "Jardim Paulista", capacidade: 60, ocupados: 60},
+          {nome: "São Luiz Itaim", bairro: "Itaim Bibi", capacidade: 55, ocupados: 55}
+        ];
+
+        for (const hospital of hospitais) {
+          await db.collection('hospitais').add(hospital);
+          log.innerHTML += `<p style="color:green;">✅ ${hospital.nome}</p>`;
+        }
+
+        // BAIRROS
+        const bairros = [
+          {nome: "Pinheiros", adjacentes: ["Vila Madalena", "Butantã", "Alto de Pinheiros", "Jardim Paulista"]},
+          {nome: "Vila Madalena", adjacentes: ["Pinheiros", "Perdizes"]},
+          {nome: "Butantã", adjacentes: ["Pinheiros", "Jaguaré", "Vila Sônia"]},
+          {nome: "Lapa", adjacentes: ["Perdizes", "Barra Funda"]},
+          {nome: "Perdizes", adjacentes: ["Vila Madalena", "Lapa", "Pompéia"]},
+          {nome: "Barra Funda", adjacentes: ["Lapa"]},
+          {nome: "Alto de Pinheiros", adjacentes: ["Pinheiros"]},
+          {nome: "Vila Leopoldina", adjacentes: ["Jaguaré"]},
+          {nome: "Jaguaré", adjacentes: ["Butantã", "Vila Leopoldina"]},
+          {nome: "Vila Sônia", adjacentes: ["Butantã", "Morumbi"]},
+          {nome: "Morumbi", adjacentes: ["Vila Sônia", "Rio Pequeno"]},
+          {nome: "Rio Pequeno", adjacentes: ["Morumbi"]},
+          {nome: "Pompéia", adjacentes: ["Perdizes"]},
+          {nome: "Jardim Paulista", adjacentes: ["Pinheiros", "Itaim Bibi"]},
+          {nome: "Itaim Bibi", adjacentes: ["Jardim Paulista"]}
+        ];
+
+        for (const bairro of bairros) {
+          await db.collection('bairros').add(bairro);
+          log.innerHTML += `<p style="color:blue;">✅ Bairro: ${bairro.nome}</p>`;
+        }
+
+        log.innerHTML += '<h2 style="color:green;">✅ Banco populado com sucesso!</h2>';
+      } catch (error) {
+        log.innerHTML += `<p style="color:red;">❌ Erro: ${error.message}</p>`;
+      }
+    }
+
+    async function limparBanco() {
+      if (!confirm('Tem certeza que deseja LIMPAR TODO o banco? Esta ação não pode ser desfeita!')) {
+        return;
+      }
+      
+      const log = document.getElementById('log');
+      log.innerHTML = '<h3>⏳ Limpando banco...</h3>';
+      
+      try {
+        // Deletar hospitais
+        const hospitaisSnapshot = await db.collection('hospitais').get();
+        for (const doc of hospitaisSnapshot.docs) {
+          await doc.ref.delete();
+          log.innerHTML += `<p style="color:orange;">🗑️ Hospital deletado</p>`;
+        }
+        
+        // Deletar bairros
+        const bairrosSnapshot = await db.collection('bairros').get();
+        for (const doc of bairrosSnapshot.docs) {
+          await doc.ref.delete();
+          log.innerHTML += `<p style="color:orange;">🗑️ Bairro deletado</p>`;
+        }
+        
+        // Deletar chamados
+        const chamadosSnapshot = await db.collection('chamados').get();
+        for (const doc of chamadosSnapshot.docs) {
+          await doc.ref.delete();
+          log.innerHTML += `<p style="color:orange;">🗑️ Chamado deletado</p>`;
+        }
+        
+        log.innerHTML += '<h2 style="color:orange;">✅ Banco limpo!</h2>';
+      } catch (error) {
+        log.innerHTML += `<p style="color:red;">❌ Erro: ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Ambulância | Créditos </title>
+  <link rel="stylesheet" href="styles.css"/>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <!-- Configuração Firebase -->
+  <script src="firebase-config.js"></script>
+  <script src="firebase-db.js"></script>
+
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="hospitais.html">🏥 Hospitais</a></li>
+        <li><a href="chamados.html">🚑 Chamados</a></li>
+        <li><a href="creditos.html" class="active">👩‍💻 Créditos</a></li>
+      </ul>
+      <button id="btnDarkToggle" title="Modo escuro">🌗</button>
+    </nav>
+  </header>
+  <main>
+    <div class="logo-cruzeiro-block">
+         <img src="img/cs.png" alt="Estrela Cruzeiro do Sul" class="estrela-cruzeiro">
+        <div class="texto-cruzeiro">
+            <span class="unisul-linha1">Universidade</span>
+            <span class="unisul-linha2">Cruzeiro do Sul</span>
+         </div>
+    </div>
+
+    <div class="info-centralizada">
+        </br><h2>Computabilidade e Complexidade de Algoritmos</h2>
+        <h4><strong>Professor:</strong> Paulo Vilela de Melo</h4>
+        </br><h2>Alunos</h2>
+    </div>
+
+    <div class="contacts-flex">
+      <div class="contact-card">
+        <img src="img/ju.jpeg" alt="Julia" class="avatar">
+        <h2>Julia Aparecida Santos</h2>
+      </div>
+      <div class="contact-card">
+        <img src="img/felipe.png" alt="Luis" class="avatar">
+        <h2>Luís Felipe da Silva Dias</h2>
+      </div>
+      <div class="contact-card">
+        <img src="img/Gi.jpeg" alt="Giovanna" class="avatar">
+        <h2>Giovanna Araújo Rozante</h2>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.getElementById('btnDarkToggle').onclick = function(){
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>
